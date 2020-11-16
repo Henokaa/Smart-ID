@@ -1,0 +1,42 @@
+
+<!-- saved from url=(0071)https://delivery.swid.switchadhub.com/adserver/user_sync.php?do[sync]=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+    try{
+        if(top && top.postMessage) {
+            top.postMessage('__switch_swid:8f32a042ad8d367c6c781d09e13f582e', '*');
+        }
+    }catch(e){ }
+</script><script>
+var swid = '8f32a042ad8d367c6c781d09e13f582e';
+if ('postMessage' in window && window.postMessage !== null) {
+    // all modern browsers support postMessage
+    try {
+        window.parent.postMessage(JSON.stringify({
+            switchconcepts: {
+                type: 'storeSwid',
+                data: {
+                    swid: swid
+                }
+            }
+        }), '*');
+    } catch(e) {
+        // no access to top domain, trafficked by third party, no first party sync available
+    }
+} else {
+    // Support for non-postMessage browsers (basically old IE)
+    try {
+        window.top.__switch_obj.storeSwid(swid, window.top.document);
+    } catch(e) {
+        // no access to top domain, trafficked by third party, no first party sync available
+    }
+
+    try{
+        // if we weren't delivered on the publisher site, send the message back to the frame we were delivered on
+        if(window.parent.parent !== window.top) {
+            window.parent.parent.__switch_obj.storeSwid(swid, window.top.document);
+        }
+    }catch(e){
+        // no access to grandparent, this shouldn't happen
+    }
+}
+</script></head><body></body></html>

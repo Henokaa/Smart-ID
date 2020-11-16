@@ -1,0 +1,2053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0069)https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SFML 2 – Tutorial – Break Out! | RiseAgain</title>
+
+<link rel="stylesheet" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/style.css" type="text/css" media="screen">
+
+<script defer="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/beacon.js.download"></script><script src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/AdCallAggregator" async=""></script><script type="text/javascript" async="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/bid"></script><script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/base.js.download"></script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/menu.js.download"></script>
+
+<link rel="pingback" href="https://riseagain.wordpress.com/xmlrpc.php">
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » Feed" href="https://riseagain.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » Comments Feed" href="https://riseagain.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » SFML 2 – Tutorial – Break Out! Comments Feed" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.5"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource(1)"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://riseagain.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="SFML 2 – Tutorial – Pong" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/">
+<link rel="next" title="Quick Game Development with C++11 / C++14 – CppCon2014" href="https://riseagain.wordpress.com/2017/04/13/quick-game-development-with-c11-c14-cppcon2014/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/">
+<link rel="shortlink" href="http://wp.me/p3bD6-d5">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="SFML 2 – Tutorial – Break Out!">
+<meta property="og:url" content="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/">
+<meta property="og:description" content="Tutorial 03 – Basic Game Structure – Break Out! In this tutorial, we will cover refresh rate, a basic game structure, a custom game loop and the game of Break Out!. How to get the refre…">
+<meta property="article:published_time" content="2012-07-19T18:04:05+00:00">
+<meta property="article:modified_time" content="2012-08-08T20:42:17+00:00">
+<meta property="og:site_name" content="RiseAgain">
+<meta property="og:image" content="https://riseagain.files.wordpress.com/2012/07/21-break-out.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=32" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=32" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=114">
+<link rel="openid.server" href="https://riseagain.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://riseagain.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://riseagain.wordpress.com/osd.xml" title="RiseAgain">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="RiseAgain"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Game Development, Game AI, Game Design and Software Engineering"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://riseagain.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="SFML 2 – Tutorial – Break Out! | RiseAgain on WordPress.com">
+<meta name="description" content="Tutorial 03 - Basic Game Structure - Break Out! In this tutorial, we will cover refresh rate, a basic game structure, a custom game loop and the game of Break Out!. How to get the refresh rate in frame per second ? With the Clock class, we can query the time spent between two redraws…">
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'riseagain.wordpress.com',
+				pageURL: 'https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/'
+			};
+		</script>
+ 		<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/head.js.download"></script>
+		<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/publishertag.js.download"></script><link rel="amphtml" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/amp/"><link rel="stylesheet" type="text/css" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/shCore.css"><link rel="stylesheet" type="text/css" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/ga.js.download"></script>
+<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/services.css"><iframe src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/showad.html" height="0" width="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="height: 0px; width: 0px; border: 0px;"></iframe></head>
+
+<body class="post-template-default single single-post postid-811 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<!-- wrap START -->
+<div id="wrap">
+
+<!-- container START -->
+<div id="container" class="one-column">
+
+<!-- header START -->
+<div id="header">
+
+	<!-- banner START -->
+		<!-- banner END -->
+
+	<div id="caption">
+		<h1 id="title"><a href="https://riseagain.wordpress.com/">RiseAgain</a></h1>
+		<div id="tagline">Game Development, Game AI, Game Design and Software Engineering</div>
+	</div>
+
+	<div class="fixed"></div>
+</div>
+<!-- header END -->
+
+<!-- navigation START -->
+<div id="navigation">
+	<!-- menus START -->
+	<ul id="menus" class="menu"><li><a class="home" href="https://riseagain.wordpress.com/" title="Home">Home</a></li><li id="menu-item-823" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-823"><a href="https://riseagain.wordpress.com/c-game-development-using-sfml-2-tutorials/">Tutorials</a></li>
+<li id="menu-item-786" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-786"><a href="https://riseagain.wordpress.com/category/game-development/game-development-talks/">GameDev Talks</a></li>
+<li id="menu-item-790" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-790"><a href="https://riseagain.wordpress.com/about/">About</a></li>
+</ul>	<!-- menus END -->
+
+	<!-- searchbox START -->
+	<div id="searchbox">
+		<form action="https://riseagain.wordpress.com/" method="get">
+			<div class="content">
+				<input type="text" class="textfield searchtip" name="s" size="24" value="">
+				<input type="submit" class="button" value="">
+			</div>
+		</form>
+	</div>
+<script type="text/javascript">
+//<![CDATA[
+	var searchbox = MGJS.$("searchbox");
+	var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+	var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+	var tiptext = "Type text to search here...";
+	if(searchtxt.value == "" || searchtxt.value == tiptext) {
+		searchtxt.className += " searchtip";
+		searchtxt.value = tiptext;
+	}
+	searchtxt.onfocus = function(e) {
+		if(searchtxt.value == tiptext) {
+			searchtxt.value = "";
+			searchtxt.className = searchtxt.className.replace(" searchtip", "");
+		}
+	}
+	searchtxt.onblur = function(e) {
+		if(searchtxt.value == "") {
+			searchtxt.className += " searchtip";
+			searchtxt.value = tiptext;
+		}
+	}
+	searchbtn.onclick = function(e) {
+		if(searchtxt.value == "" || searchtxt.value == tiptext) {
+			return false;
+		}
+	}
+//]]>
+</script>
+	<!-- searchbox END -->
+
+	<div class="fixed"></div>
+</div>
+<!-- navigation END -->
+
+<!-- content START -->
+<div id="content">
+
+	<!-- main START -->
+	<div id="main">
+
+
+	<div id="postpath">
+		<a title="Go to homepage" href="https://riseagain.wordpress.com/">Home</a>
+		 &gt; <a href="https://riseagain.wordpress.com/category/game-development/" rel="category tag">Game Development</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/" rel="category tag">Programming</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/tutorial-programming/" rel="category tag">Tutorial</a>		 &gt; SFML 2 – Tutorial – Break&nbsp;Out!	</div>
+
+	<div id="post-811" class="post-811 post type-post status-publish format-standard hentry category-game-development category-programming category-tutorial-programming tag-gamedev-2">
+		<h2>SFML 2 – Tutorial – Break&nbsp;Out!</h2>
+		<div class="info">
+			<span class="date">July 19, 2012</span>
+												<div class="fixed"></div>
+		</div>
+		<div class="content">
+			<p><br></p>
+<h1 style="text-align:center;"><strong>Tutorial 03 – Basic Game Structure – Break Out!</strong></h1>
+<p><br></p>
+<p>
+In this tutorial, we will cover refresh rate, a basic game structure, a custom game loop and the game of Break Out!.
+</p>
+<p><br></p>
+<h2 style="text-align:center;"><strong>How to get the refresh rate in frame per second ?</strong></h2>
+<p><br></p>
+<p style="text-align:justify;">
+With the Clock class, we can query the time spent between two redraws with getElapsedTime(). </p>
+<p>One million divided by the number of micro seconds since the last redraw is the number of frames that can be drawn in a second at the current rate. For more precision, we can wait several frames and get an average of the elasped time per frame.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">Time time=clock.getElapsedTime();
+float fFps=1000000/time.asMicroseconds();
+std::stringstream s;
+s&lt;&lt;fFps;
+fps.setString(s.str());
+clock.restart();
+</pre>
+<p style="text-align:justify;">
+With that in place, we can see that the previous pong example ran at more than a thousand frames per second. This is wasteful in resources, I wouldn’t want to make the GPU overheat just for pong. Especially since my monitor doesn’t refresh the screen at more than 60 times a second.
+</p>
+<p>
+So we’ll limit our framerate with window.setFramerateLimit(unsigned int). It makes window.display sleep a bit.&nbsp;window.setVerticalSyncEnabled(bool) can be used too but it can be overridden by global graphic parameters.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">window.setFramerateLimit(60);
+window.setVerticalSyncEnabled(true);
+</pre>
+<p><br></p>
+<h2 style="text-align:center;"><strong>How to use Clock to get a smoother animation ?</strong></h2>
+<p><br></p>
+<p>
+If there is a long time spent between two redisplays, it can cause jerkiness. Objects that should have a constant speed appear to slow down with the frame rate. We compensate by scaling all object speeds by the time spent since last redisplay.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">ball.move(ballSpeed.x*time.asMilliseconds(),  ballSpeed.y*time.asMilliseconds());
+</pre>
+<p><br></p>
+<h2 style="text-align:center;"><strong>Basic Game Structure:</strong></h2>
+<p><br></p>
+<p>
+We’ll use a Game class with only an init and an exec public functions, greatly simplifying our main to :
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">int main()
+{
+	Game game;
+	if (!game.init())
+		return EXIT_FAILURE;
+	return game.exec();
+}
+</pre>
+<p>The game class inits SFML, sets up the game objects, it can update various parts of the game and enters a custom game loop when exec is called. It processes the events and displays the game scene.<br>
+<br><br></p>
+<h2 style="text-align:center;"><strong>Custom Game loop:</strong></h2>
+<p><br></p>
+<p>
+We’ve seen that calling setFramerate will make window.display() to sleep if it is called more often than the frame rate. How can we take that time back for our game engine ? There are cases where we wish to use as much computing power as possible. Even in pong or in our next example, break out, collision detection is easier if the speed vector of the ball is small (if it is too big we can even miss a collision). Using a faster game loop will allow a finer grained simulation.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">	int exec()
+	{
+		Clock renderClock, updateClock;
+		while (window.isOpen())
+		{
+			time=renderClock.getElapsedTime();
+			float fFps=1000000/time.asMicroseconds();
+			std::stringstream s;
+			s&lt;&lt;fFps;
+			fps.setString(s.str());
+			renderClock.restart();
+
+			const Int64 frameTime = 1000000/FRAMES_PER_SECOND;
+			Clock c;
+			Time t=c.getElapsedTime();
+			Int64 nextFrameTime=t.asMicroseconds()+frameTime;
+
+			int loops = 0;
+			while( t.asMicroseconds() &lt; nextFrameTime &amp;&amp; loops &lt; MAX_FRAMESKIP)
+			{
+				processEvents();
+				updateTime=updateClock.restart().asMilliseconds();
+				update();
+				t=c.getElapsedTime();
+				loops++;
+			}
+
+			display();
+		}
+</pre>
+<p>
+Now the game loop will call update up to ten times faster than display. We use updateTime to scale the game object speed accordingly.
+</p>
+<p><br></p>
+<h2 style="text-align:center;"><strong>How to add sounds ?</strong></h2>
+<p><br></p>
+<p>
+Sound files of various formats are loaded into a SoundBuffer with:
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">bool 	SoundBuffer::loadFromFile (const std::string &amp;filename)
+</pre>
+<p>
+Then we’ll declare a Sound from any available SoundBuffer and play it. We can adjust its pitch and volume with setPitch and setVolume.</p>
+<p>In the next example, we simulate the use of the keyboard as a piano:
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">#include &lt;SFML/Audio.hpp&gt;
+#include &lt;SFML/Graphics.hpp&gt;
+
+using namespace sf;
+
+void playSound(Sound &amp; s, float pitch)
+{
+	float p=s.getPitch();
+	s.setPitch(pitch);
+	s.play();
+}
+
+int main()
+{
+    VideoMode videoMode(320,240);
+    RenderWindow window(videoMode,"Piano");
+
+    SoundBuffer soundBuffer1;
+    if (!soundBuffer1.loadFromFile("blip.wav"))
+        return EXIT_FAILURE;
+    Sound blip(soundBuffer1);
+
+	SoundBuffer soundBuffer2;
+	if (!soundBuffer2.loadFromFile("blam.wav"))
+        return EXIT_FAILURE;
+    Sound blam(soundBuffer2);
+
+	SoundBuffer soundBuffer3;
+	if (!soundBuffer3.loadFromFile("blap.wav"))
+        return EXIT_FAILURE;
+    Sound blap(soundBuffer3);
+
+	SoundBuffer soundBuffer4;
+	if (!soundBuffer4.loadFromFile("blop.wav"))
+        return EXIT_FAILURE;
+    Sound blop(soundBuffer4);
+
+	Font font;
+	if (!font.loadFromFile("tomb.ttf"))
+		return EXIT_FAILURE;
+
+	Text info("Use the keys \n A Z E R \n Q S D F\n W X C V\n to play sounds.",font,20);
+ 	info.setPosition(20,30);
+	info.setColor(Color::Blue);
+
+    while (window.isOpen())
+    {
+		window.clear();
+		window.draw(info);
+		window.display();
+
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+                window.close();
+			else
+			if (event.type == Event::KeyPressed)
+			{
+				switch(event.key.code)
+				{
+				  case Keyboard::Q:
+					  playSound(blip, 1.0);
+					break;
+				  case Keyboard::S:
+					  playSound(blam, 1.0);
+					break;
+				  case Keyboard::D:
+					  playSound(blap, 1.0);
+					break;
+				  case Keyboard::F:
+					  playSound(blop, 1.0);
+					break;
+
+				  case Keyboard::W:
+					  playSound(blip, 0.8);
+					break;
+				  case Keyboard::X:
+					  playSound(blam, 0.8);
+					break;
+				  case Keyboard::C:
+					  playSound(blap, 0.8);
+					break;
+				  case Keyboard::V:
+					  playSound(blop, 0.8);
+					break;
+
+				  case Keyboard::A:
+					  playSound(blip, 1.2);
+					break;
+				  case Keyboard::Z:
+					  playSound(blam, 1.2);
+					break;
+				  case Keyboard::E:
+					  playSound(blap, 1.2);
+					break;
+				  case Keyboard::R:
+					  playSound(blop, 1.2);
+					break;
+
+				  case Keyboard::Escape:window.close();
+					break;
+
+				}
+			}
+        }
+
+    }
+    return EXIT_SUCCESS;
+}
+</pre>
+<p><br></p>
+<h2 style="text-align:center;"><strong>How to improve our rectangle collisions ?</strong></h2>
+<p><br></p>
+<p>
+Until now, we have only simulated collisions coming from one side.</p>
+<p>We now want a rectangle that reflects the ball according to the side it is coming from.</p>
+<p>Supposing the ball can be represented by a point, we use the angle of its speed vector seen from the center of the rectangle to determine which side it is coming from.</p>
+<p>For instance, we can now correct the previous game of pong so that players only hit the ball if it is coming from the front side. Collisions coming from the rear can be ignored.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">		// ball collides with player1
+		if (intersects(ball,player1))
+		{
+			FloatRect p= player1.getGlobalBounds();
+			FloatRect b= ball.getGlobalBounds();
+
+			//let o be the center of p
+			Vector2f o=Vector2f(p.left+p.width/2,p.top+p.height/2);
+			//om: vector from o to the center of the ball
+			Vector2f om=Vector2f(b.left+b.width/2-o.x,b.top+b.height/2-o.y);
+			// let's scale om to square dimensions and act as if p is a square
+			om.x/=p.width;
+			om.y/=p.height;
+			// reflect the ball according to the angle of om
+			float angle=atan2(om.y,om.x);
+			if ( abs(angle) &lt;PI/2) //right - PI/4 is restrictive
+			{
+				ballSpeed.x= abs(ballSpeed.x);//in case of double contact
+				ballSpeed.y= (b.top+b.height/2 - p.top - p.height/2) / 100;
+				int u = p.left +  p.width - b.left;
+				b.left = p.left +  p.width + u;
+				ball.setPosition(b.left,b.top);
+				//increase ball speed by 2%
+				ballSpeed.x*=1.02f;
+				ballSpeed.y*=1.02f;
+				blip.play();
+			}
+		}
+</pre>
+<p>In addition with these changes, we will use the new game structure, the new game loop and sounds.</p>
+<p>Let’s now review our Pong source, freshly refactored:</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">#include &lt;SFML/Audio.hpp&gt;
+#include &lt;SFML/Graphics.hpp&gt;
+#include &lt;algorithm&gt;
+#include &lt;math.h&gt;
+#include &lt;sstream&gt;
+
+#define PI   3.14159265358979323846
+
+using namespace sf;
+
+bool intersects (const RectangleShape &amp; rect1,const RectangleShape &amp; rect2)
+{
+    FloatRect r1=rect1.getGlobalBounds();
+    FloatRect r2=rect2.getGlobalBounds();
+    return r1.intersects (r2);
+}
+
+float clamp (const float x, const float a, const float b)
+{
+    return std::min(std::max(a,x),b);
+}
+
+class Game
+{
+private:
+    static const int FRAMES_PER_SECOND = 60;    
+    static const int MAX_FRAMESKIP = 10;
+    static const int width = 640;
+    static const int height= 480;
+    static const int borderSize= 12;
+    static const int margin = 50;
+    static const int moveDistance = 20;
+    
+
+    RenderWindow window;
+    Font font;
+
+    RectangleShape top;
+    RectangleShape left;
+    RectangleShape right;
+    RectangleShape bottom;    
+
+    RectangleShape ball;
+
+    Vector2f ballSpeed;
+
+    RectangleShape player1;    
+    RectangleShape player2;    
+
+    RectangleShape middleLine;
+
+    Text title;
+    Text start;
+    Text won;
+    Text lost;
+    Text score;
+    Text fps;
+
+    SoundBuffer soundBuffer1;
+    Sound blip;
+    SoundBuffer soundBuffer2;
+    Sound blam;    
+    SoundBuffer soundBuffer3;
+    Sound blap;
+    SoundBuffer soundBuffer4;
+    Sound blop;
+
+    Time time;
+    Int32 updateTime;
+
+    unsigned int p1Score, p2Score;
+
+    enum states {INTRO, PLAYING, P1WON, P1LOST};
+    
+    int gameState;
+    
+public:
+    Game()
+    {
+    }
+
+    bool init()
+    {
+        VideoMode videoMode(width, height);
+        window.create(videoMode,"Pong Structured");
+        window.setVerticalSyncEnabled(true);
+        window.setFramerateLimit(FRAMES_PER_SECOND);
+
+        if (!font.loadFromFile("tomb.ttf"))
+            return false;  
+
+        if (!soundBuffer1.loadFromFile("blip.wav"))
+            return false;
+        
+        if (!soundBuffer2.loadFromFile("blam.wav"))
+            return false;
+        
+        if (!soundBuffer3.loadFromFile("blap.wav"))
+            return false;
+
+        if (!soundBuffer4.loadFromFile("blop.wav"))
+            return false;
+
+        setup();
+        return true;
+    }
+
+    int exec()
+    {
+        Clock renderClock, updateClock;
+        while (window.isOpen())
+        {
+            time=renderClock.getElapsedTime();
+            float fFps=1000000/time.asMicroseconds();
+            std::stringstream s;
+            s&lt;&lt;fFps&lt;&lt;" fps";
+            fps.setString(s.str());
+            renderClock.restart();
+        
+            const Int64 frameTime = 1000000/FRAMES_PER_SECOND;
+            Clock c;
+            Time t=c.getElapsedTime();
+            Int64 nextFrameTime=t.asMicroseconds()+frameTime;
+
+            int loops = 0;
+            while( t.asMicroseconds() &lt; nextFrameTime &amp;&amp; loops &lt; MAX_FRAMESKIP) 
+            {
+                processEvents();
+                updateTime=updateClock.restart().asMilliseconds();
+                update();
+                t=c.getElapsedTime();
+                loops++;
+            }        
+            
+            display();
+        }
+        
+        return EXIT_SUCCESS;
+    }
+
+private:
+
+    void processEvents()
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if ( (event.type == Event::Closed) ||
+            ((event.type == Event::KeyPressed) &amp;&amp; (event.key.code==Keyboard::Escape)) )
+                window.close();    
+            else
+            if ((event.type == Event::KeyPressed) &amp;&amp; (gameState == INTRO))
+                gameState=PLAYING;
+        }
+    }
+
+    void update()
+    {
+        if (gameState!=PLAYING)
+            return;
+
+        updatePlayer1();
+        updatePlayer2();
+        checkCollisions();
+        updateBall();
+
+        // detect if game is over
+        if (p1Score &gt;=11 &amp;&amp; p1Score &gt;= p2Score +2)
+            gameState=P1WON;
+        if (p2Score &gt;=11 &amp;&amp; p2Score &gt;= p1Score +2)
+            gameState=P1LOST;
+    }
+
+    void setup()
+    {
+        top.setPosition(-2*borderSize, 0);
+        top.setSize(Vector2f(width+4*borderSize, borderSize));
+
+        left.setPosition(-borderSize*3, 0);
+        left.setSize(Vector2f(borderSize, height));
+
+        right.setPosition(width+2*borderSize, 0);
+        right.setSize(Vector2f(borderSize, height));
+
+        bottom.setPosition(-2*borderSize, height-borderSize);
+        bottom.setSize(Vector2f(width+4*borderSize, borderSize));
+            
+        top.setFillColor(Color(100,100,100));
+        top.setOutlineColor(Color::Blue);
+        top.setOutlineThickness(3);
+
+        left.setFillColor(Color(100,100,100));
+        left.setOutlineColor(Color::Blue);
+        left.setOutlineThickness(3);
+
+        right.setFillColor(Color(100,100,100));
+        right.setOutlineColor(Color::Blue);
+        right.setOutlineThickness(3);
+
+        bottom.setFillColor(Color(100,100,100));
+        bottom.setOutlineColor(Color::Blue);
+        bottom.setOutlineThickness(3);
+        
+        ball.setPosition(width/2, height/2);
+        ball.setSize(Vector2f(20, 20));
+        ball.setFillColor(Color::Yellow);
+        ball.setOutlineColor(Color::Red);
+        ball.setOutlineThickness(2);
+
+        player1.setSize(Vector2f(borderSize, 90));
+        player1.setPosition(margin-borderSize, height/2-25);
+        player1.setFillColor(Color(0,122,245));
+        player1.setOutlineColor(Color::Red);
+        player1.setOutlineThickness(3);
+        
+        player2.setSize(Vector2f(borderSize, 90));
+        player2.setPosition(width-margin, height/2-25);
+        player2.setFillColor(Color(0,122,245));
+        player2.setOutlineColor(Color::Red);
+        player2.setOutlineThickness(3);
+            
+        middleLine.setFillColor(Color(100,100,100,30));
+        middleLine.setOutlineColor(Color(0,0,100,30));
+        middleLine.setOutlineThickness(2);
+        middleLine.setPosition(width/2, 0);
+        middleLine.setSize(Vector2f(0, height));
+
+        title.setString("Pong SFML 2");
+        title.setFont(font);
+        title.setCharacterSize(50);
+        title.setPosition(width/2-title.getGlobalBounds().width/2,100);
+        title.setColor(Color::Blue); 
+    
+        start.setString("Press any key to start");
+        start.setFont(font);
+        start.setCharacterSize(30);
+        start.setPosition(width/2-start.getGlobalBounds().width/2,400);
+        start.setColor(Color::Red);
+
+        won.setString("You have won this game.\n\n Congratulations !");
+        won.setFont(font);
+        won.setCharacterSize(20);
+        won.setPosition(width/2-won.getGlobalBounds().width/2,height/2-won.getGlobalBounds().height/2);
+        won.setColor(Color::Green);
+
+        lost.setString("You have lost this game, \n better luck next time!");
+        lost.setFont(font);
+        lost.setCharacterSize(20);
+        lost.setPosition(width/2-lost.getGlobalBounds().width/2,height/2-lost.getGlobalBounds().height/2);
+        lost.setColor(Color::Red);
+
+        score.setString("0   0");
+        score.setFont(font);
+        score.setCharacterSize(50);
+        score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+        score.setColor(Color(0,0,100,50));
+
+        fps.setString("0");
+        fps.setFont(font);
+        fps.setCharacterSize(30);
+        fps.setPosition(fps.getGlobalBounds().width/2,40);
+        fps.setColor(Color(52,0,100,50));
+
+        
+        blip=Sound(soundBuffer1);        
+        blam=Sound(soundBuffer2);    
+        blap=Sound(soundBuffer3);    
+        blop=Sound(soundBuffer4);
+        
+        resetGame1();
+        p1Score=0;
+        p2Score=0;
+        gameState=INTRO;
+
+    }
+
+    void display()
+    {        
+        window.clear(Color::White);
+        switch(gameState)
+        {
+            case INTRO:
+                window.draw(title);
+                window.draw(start);
+                break;
+            case PLAYING:
+                window.draw(middleLine);
+                window.draw(left);
+                window.draw(right);            
+                window.draw(player1);    
+                window.draw(player2);    
+                window.draw(ball);    
+                window.draw(score);    
+                window.draw(top);
+                window.draw(bottom);        
+                window.draw(fps);    
+                break;
+            case P1WON:
+                window.draw(won);
+                break;
+            case P1LOST:
+                window.draw(lost);
+                break;
+        }
+        window.display();
+    }
+
+    void updatePlayer1()
+    {
+        // move player 1 pad
+        if (Keyboard::isKeyPressed(Keyboard::Up))
+        {
+            player1.move(0,-moveDistance*updateTime/50.0);
+        }else
+        if (Keyboard::isKeyPressed(Keyboard::Down))
+        {
+            player1.move(0,moveDistance*updateTime/50.0);
+        }
+    }
+
+    void updatePlayer2()
+    {
+        // auto move player2 pad
+        if (ball.getPosition().y &lt; player2.getPosition().y)
+            player2.move(0, -moveDistance*updateTime/40.0);
+        else if(ball.getPosition().y+ball.getSize().y &gt; player2.getPosition().y+player2.getSize().y)
+            player2.move(0, moveDistance*updateTime/40.0);
+    }
+
+    void updateBall()
+    {
+        ball.move(ballSpeed.x*updateTime,ballSpeed.y*updateTime);
+    }
+
+    void checkCollisions()
+    {
+                        
+        // block players pad inside the play area
+        if ( intersects(player1,bottom) || intersects(player1,top) )
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=bottom.getGlobalBounds();
+            Vector2f p=player1.getPosition();
+            p.y=clamp(p.y,t.top+t.height+5,b.top-player1.getSize().y-5);
+            player1.setPosition(p);
+            blap.play();
+        }
+        if ( intersects(player2,bottom) || intersects(player2,top) )
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=bottom.getGlobalBounds();
+            Vector2f p=player2.getPosition();
+            p.y=clamp(p.y,t.top+t.height+5,b.top-player2.getSize().y-5);
+            player2.setPosition(p);
+            blap.play();
+        }
+        // ball collides with top and bottom
+        if (intersects(ball,top))
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.y*= -1;
+            int u = t.top + t.height - b.top;
+            ball.move(0,2*u);   
+            blop.play();
+        }
+        if ( intersects(ball,bottom) )
+        {
+            FloatRect bot= bottom.getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+            ballSpeed.y*= -1;
+            int u = bot.top - b.height - b.top;
+            ball.move(0,2*u); 
+            blop.play();
+        }
+        // ball collides with player1 and player2
+        if (intersects(ball,player1))
+        {
+            FloatRect p= player1.getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+
+            //let o be the center of p
+            Vector2f o=Vector2f(p.left+p.width/2,p.top+p.height/2);
+            //om: vector from o to the center of the ball
+            Vector2f om=Vector2f(b.left+b.width/2-o.x,b.top+b.height/2-o.y);
+            // let's scale om to square dimensions and act as if p is a square
+            om.x/=p.width;
+            om.y/=p.height;
+            // reflect the ball according to the angle of om
+            float angle=atan2(om.y,om.x);
+            if ( abs(angle) &lt;PI/2) //right - PI/4 is restrictive
+            {
+                ballSpeed.x= abs(ballSpeed.x);//in case of double contact
+                ballSpeed.y= (b.top+b.height/2 - p.top - p.height/2) / 100;
+                int u = p.left +  p.width - b.left;
+                b.left = p.left +  p.width + u;
+                ball.setPosition(b.left,b.top);
+                //increase ball speed by 2%
+                ballSpeed.x*=1.02f;
+                ballSpeed.y*=1.02f;                
+                blip.play();
+            }
+        }
+        if ( intersects(ball,player2) )
+        {
+            FloatRect p=player2.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+
+            //let o be the center of p
+            Vector2f o=Vector2f(p.left+p.width/2,p.top+p.height/2);
+            //om: vector from o to the center of the ball
+            Vector2f om=Vector2f(b.left+b.width/2-o.x,b.top+b.height/2-o.y);
+            // let's scale om to square dimensions and act as if p is a square
+            om.x/=p.width;
+            om.y/=p.height;
+            // reflect the ball according to the angle of om
+            float angle=atan2(om.y,om.x);
+            if ( abs(angle) &gt; PI/2) //left - 3*PI/4 is restrictive
+            {
+                ballSpeed.x= -abs(ballSpeed.x);//in case of double contact
+                ballSpeed.y= (b.top+b.height/2 - p.top - p.height/2) / 100;
+                int u = b.left + b.width - p.left;
+                b.left = p.left -  b.width - u;
+                ball.setPosition(b.left,b.top);
+                //increase ball speed by 2%
+                ballSpeed.x*=1.02f;
+                ballSpeed.y*=1.02f;
+                blip.play();
+            }            
+        }                        
+        
+        // check for scoring
+        if (intersects(ball,left))
+        {
+            blam.play();
+            p2Score++;
+            std::stringstream str;
+            str &lt;&lt; p1Score &lt;&lt; "   " &lt;&lt; p2Score;
+            score.setString(str.str());
+            score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+            resetGame2();
+        }
+        if (intersects(ball,right))
+        {
+            blam.play();
+            p1Score++;
+            std::stringstream str;
+            str &lt;&lt; p1Score &lt;&lt; "   " &lt;&lt; p2Score;
+            score.setString(str.str());
+            score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+            resetGame1();
+        }
+
+    }
+
+    void resetGame1()
+    {
+        FloatRect p=player1.getGlobalBounds();
+        FloatRect b=ball.getGlobalBounds();
+        ball.setPosition(p.left+p.width+5, height/2);
+        ballSpeed.x=0.3f;
+        ballSpeed.y=0.3f;
+    }
+
+    void resetGame2()
+    {
+        FloatRect p=player2.getGlobalBounds();
+        FloatRect b=ball.getGlobalBounds();
+        ball.setPosition(p.left-b.width-5, height/2);
+        ballSpeed.x=-0.3f;
+        ballSpeed.y=0.3f;
+    }
+};
+
+
+int main()
+{
+    Game game;
+    if (!game.init())
+        return EXIT_FAILURE;
+    return game.exec();
+}
+</pre>
+<p><em>Result:</em></p>
+<p><a href="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png"><img data-attachment-id="815" data-permalink="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/19-pong-structured/" data-orig-file="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=901" data-orig-size="654,515" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="19 – pong structured" data-image-description="" data-medium-file="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=901?w=300" data-large-file="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=901?w=654" class="size-full wp-image-815 aligncenter" title="19 - pong structured" src="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=901" alt="" srcset="https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png 654w, https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=150 150w, https://riseagain.files.wordpress.com/2012/07/19-pong-structured.png?w=300 300w" sizes="(max-width: 654px) 100vw, 654px"></a></p>
+<p>
+Our next game is break out. It follows logically from pong. It will stress out our new collision technique because bricks must reflect precisely the ball on each side.
+</p>
+<p><br></p>
+<h2 style="text-align:center;"><strong>Let’s make Break Out</strong></h2>
+<p><br></p>
+<p style="text-align:justify;">
+In Break Out, the player controls a pad and uses it to reflect the ball on a grid of bricks. Bricks disappears if the ball hits them twice. The player wins the game if there are no more bricks. The player loses a live if the ball passes through the bottom of the screen. If he loses his 5 lives, he loses the game and must restart at level1.
+</p>
+<p style="text-align:justify;">
+We will use a a Brick class for single bricks and a Grid class to store all the bricks. Brick inherits from RectangleShape and Grid from FloatRect. The game is quite similar to pong except there is only one player and that the level is somehow dynamic. The configuration of the parameters is also sligthtly different, the pad moves faster but gives less angle to the ball.
+</p>
+<p style="text-align:justify;">T<br>
+he conditions of winning and losing the game depend on playerLives and are easy to handle.
+</p>
+<p style="text-align:justify;">
+The score is increased by 700 pts one the destructions of bricks. It requires a passing of arguments between Grid and Game.
+</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">#include &lt;SFML/System.hpp&gt;
+#include &lt;SFML/Window.hpp&gt;
+#include &lt;SFML/Graphics.hpp&gt;
+#include &lt;SFML/Audio.hpp&gt;
+#include &lt;math.h&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+
+#define PI   3.14159265358979323846
+
+using namespace sf;
+
+bool intersects (const RectangleShape &amp; rect1,const RectangleShape &amp; rect2)
+{
+    FloatRect r1=rect1.getGlobalBounds();
+    FloatRect r2=rect2.getGlobalBounds();
+    return r1.intersects (r2);
+}
+
+float clamp (const float x, const float a, const float b)
+{
+    return std::min(std::max(a,x),b);
+}
+
+
+class Brick : public RectangleShape
+{
+public:
+    unsigned int armor;
+
+    Brick():RectangleShape()
+    {
+        armor=2;
+    }
+
+    Brick(const Vector2f &amp; size):RectangleShape(size)
+    {
+        armor=2;
+    }
+
+
+    bool collide(RectangleShape &amp; ball, Vector2f &amp; ballSpeed)
+    {
+        // ball collides brick
+        if (intersects(ball,*this))
+        {
+            FloatRect r= getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+
+            //let o be the center of p
+            Vector2f o=Vector2f(r.left+r.width/2,r.top+r.height/2);
+            //om: vector from o to the center of the ball M
+            Vector2f om=Vector2f(b.left+b.width/2-o.x,b.top+b.height/2-o.y);
+            // let's scale om to square dimensions and act as if p is a square
+            om.x/=r.width;
+            om.y/=r.height;
+            // reflect the ball according to the angle of om
+            float angle=atan2(om.y,om.x);
+            if ( angle &gt;= PI/4 &amp;&amp; angle &lt;= 3*PI/4) //bottom
+            {
+                ballSpeed.y = abs(ballSpeed.y);                
+                float u = r.top + r.height - b.top ;
+                ball.move(0,2*u);
+                return true;
+            }
+            if ( angle &lt;= -PI/4 &amp;&amp; angle &gt;= -3*PI/4) //top
+            {
+                ballSpeed.y = -abs(ballSpeed.y);        
+                float u = b.top + b.height - r.top;
+                ball.move(0,-2*u);
+                return true;
+            }
+            if ( angle &lt;= -3*PI/4) //left
+            {
+                ballSpeed.y = -abs(ballSpeed.x);        
+                float u = b.left + b.width - r.left;
+                ball.move(-2*u,0);
+                return true;
+            }
+            if ( abs(angle) &lt;= PI/4) //right
+            {
+                ballSpeed.y = abs(ballSpeed.x);            
+                float u = r.left + r.width - b.left;
+                ball.move(2*u,0);
+                return true;
+            }            
+        }
+        return false;
+    }
+
+
+};
+
+
+class Grid: public FloatRect
+{
+private:
+    unsigned int rows;
+    unsigned int columns;
+    
+    std::vector&lt;Brick&gt; * bricks;
+
+public:
+    Grid()
+    {
+        rows=0;
+        columns=0;
+        bricks = NULL;
+    }
+    
+    ~Grid()
+    {
+        if (bricks != NULL)
+            delete bricks;
+    }
+
+    void setDimensions(unsigned int col, unsigned int row)
+    {
+        rows=row;
+        columns=col;
+        if (bricks != NULL)
+            delete bricks;
+
+        bricks = new std::vector&lt;Brick&gt; (rows*columns);        
+        init();
+    }
+
+    Vector2f cellSize()
+    {
+        return Vector2f(width/columns,height/rows);
+    }
+
+    void init()
+    {
+        for (int i=0;i&lt;rows;i++)
+            for (int j=0;j&lt;columns;j++)
+            {
+                bricks-&gt;at(i+j*rows).setSize(cellSize());
+                bricks-&gt;at(i+j*rows).setFillColor(Color::Blue);
+                bricks-&gt;at(i+j*rows).setOutlineColor(Color::Black);
+                bricks-&gt;at(i+j*rows).setOutlineThickness(3);
+                bricks-&gt;at(i+j*rows).setPosition(left+j*cellSize().x, top+i*cellSize().y);
+            }
+    }
+
+    void display (RenderWindow &amp; window)
+    {
+        for (int i=0;i&lt;rows;i++)
+            for (int j=0;j&lt;columns;j++)
+            {
+                if (bricks-&gt;at(i+j*rows).armor &lt;=0)
+                    continue;
+                window.draw(bricks-&gt;at(i+j*rows));
+            }
+    }
+
+    bool collide(RectangleShape &amp; ball, Vector2f &amp; ballSpeed, unsigned int &amp; score)
+    {
+        for (int i=0;i&lt;rows;i++)
+            for (int j=0;j&lt;columns;j++)
+            {
+                if (bricks-&gt;at(i+j*rows).armor &lt;=0)
+                    continue;
+                if (bricks-&gt;at(i+j*rows).collide(ball, ballSpeed) )
+                {
+                    bricks-&gt;at(i+j*rows).armor--;
+                    bricks-&gt;at(i+j*rows).setFillColor(Color::Green);
+                    if (bricks-&gt;at(i+j*rows).armor==0)
+                        score+=700;
+
+                    return true;
+                }
+            }
+        return false;
+    }
+
+    bool isGameWon()
+    {
+        for (int i=0;i&lt;rows;i++)
+            for (int j=0;j&lt;columns;j++)
+                if (bricks-&gt;at(i+j*rows).armor &gt;0)
+                    return false;
+        return true;
+    }
+
+};
+
+    
+
+/**
+ * Basic Game Structure
+ * use init and exec in main
+ */
+class Game 
+{
+private:
+    static const int FRAMES_PER_SECOND = 60;    
+    static const int MAX_FRAMESKIP = 10; 
+    static const int width = 640;
+    static const int height= 480;
+    static const int borderSize= 12;
+    static const int margin = 50;
+    static const int moveDistance = 40;
+    
+
+    RenderWindow window;
+    Font font;
+
+    RectangleShape top;
+    RectangleShape left;
+    RectangleShape right;
+    RectangleShape bottom;    
+
+    RectangleShape ball;
+
+    Vector2f ballSpeed;
+
+    RectangleShape player;    
+
+    Text title;
+    Text start;
+    Text won;
+    Text lost;
+    Text score;
+    Text lives;
+    Text fps;
+
+    SoundBuffer soundBuffer1;
+    Sound blip;
+    SoundBuffer soundBuffer2;
+    Sound blam;    
+    SoundBuffer soundBuffer3;
+    Sound blap;
+    SoundBuffer soundBuffer4;
+    Sound blop;
+
+    Grid grid;
+
+    Time time;
+    Int32 updateTime;
+
+    unsigned int playerScore;
+    unsigned int playerLives;
+
+    enum states {INTRO, PLAYING, GAME_WON, GAME_LOST};
+    
+    int gameState;
+    
+public:
+    Game()
+    {
+    }
+
+    bool init()
+    {
+        VideoMode videoMode(width, height);
+        window.create(videoMode,"Break Out");
+        window.setVerticalSyncEnabled(true);
+        window.setFramerateLimit(FRAMES_PER_SECOND);
+
+        if (!font.loadFromFile("tomb.ttf"))
+            return false;  
+
+        if (!soundBuffer1.loadFromFile("blip.wav"))
+            return false;
+        
+        if (!soundBuffer2.loadFromFile("blam.wav"))
+            return false;
+        
+        if (!soundBuffer3.loadFromFile("blap.wav"))
+            return false;
+
+        if (!soundBuffer4.loadFromFile("blop.wav"))
+            return false;
+
+        setup();
+        return true;
+    }
+
+    int exec()
+    {
+        Clock renderClock, updateClock;
+        while (window.isOpen())
+        {
+            time=renderClock.getElapsedTime();
+            float fFps=1000000/time.asMicroseconds();
+            std::stringstream s;
+            s&lt;&lt;"fps: "&lt;&lt;fFps;
+            fps.setString(s.str());
+            renderClock.restart();
+        
+            const Int64 frameTime = 1000000/FRAMES_PER_SECOND;
+            Clock c;
+            Time t=c.getElapsedTime();
+            Int64 nextFrameTime=t.asMicroseconds()+frameTime;
+
+            int loops = 0;
+            while( t.asMicroseconds() &lt; nextFrameTime &amp;&amp; loops &lt; MAX_FRAMESKIP) 
+            {
+                processEvents();
+                updateTime=updateClock.restart().asMilliseconds();
+                update();
+                t=c.getElapsedTime();
+                loops++;
+            }        
+            
+            display();
+        }
+        
+        return EXIT_SUCCESS;
+    }
+
+private:
+
+    void processEvents()
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if ( (event.type == Event::Closed) ||
+            ((event.type == Event::KeyPressed) &amp;&amp; (event.key.code==Keyboard::Escape)) )
+                window.close();    
+            else
+            if ((event.type == Event::KeyPressed) &amp;&amp; (gameState == INTRO))
+                gameState=PLAYING;
+        }
+    }
+
+    void update()
+    {
+        if (gameState!=PLAYING)
+            return;
+
+        updatePlayer();
+        checkCollisions();
+        updateBall();
+
+        // detect if game is over
+        if (playerLives &lt; 0)
+            gameState=GAME_LOST;
+    }
+
+    void setup()
+    {
+        top.setPosition(0, 0);
+        top.setSize(Vector2f(width, borderSize));
+
+        left.setPosition(0, borderSize);
+        left.setSize(Vector2f(borderSize, height+borderSize));
+
+        right.setPosition(width-borderSize, borderSize);
+        right.setSize(Vector2f(borderSize, height+borderSize));
+
+        bottom.setPosition(0, height+2*borderSize);
+        bottom.setSize(Vector2f(width, borderSize));
+            
+        top.setFillColor(Color(100,100,100));
+        top.setOutlineColor(Color::Black);
+        top.setOutlineThickness(2);
+
+        left.setFillColor(Color(100,100,100));
+        left.setOutlineColor(Color::Black);
+        left.setOutlineThickness(2);
+
+        right.setFillColor(Color(100,100,100));
+        right.setOutlineColor(Color::Black);
+        right.setOutlineThickness(2);
+
+        bottom.setFillColor(Color(100,100,100));
+        bottom.setOutlineColor(Color::Black);
+        bottom.setOutlineThickness(2);
+        
+        ball.setPosition(width/2, height-margin);
+        ball.setSize(Vector2f(20, 20));
+        ball.setFillColor(Color::Green);
+        ball.setOutlineColor(Color::Red);
+        ball.setOutlineThickness(2);
+
+        player.setSize(Vector2f(90,borderSize));
+        player.setPosition(width/2-45, height-margin-borderSize);
+        player.setFillColor(Color(0,122,245));
+        player.setOutlineColor(Color::Green);
+        player.setOutlineThickness(3);
+        
+        title.setString("Break Out!");
+        title.setFont(font);
+        title.setCharacterSize(50);
+        title.setPosition(width/2-title.getGlobalBounds().width/2,100);
+        title.setColor(Color::Blue); 
+    
+        start.setString("Press any key to start");
+        start.setFont(font);
+        start.setCharacterSize(30);
+        start.setPosition(width/2-start.getGlobalBounds().width/2,400);
+        start.setColor(Color::Red);
+
+        won.setString("You have won this game.\n\n Congratulations !");
+        won.setFont(font);
+        won.setCharacterSize(20);
+        won.setPosition(width/2-won.getGlobalBounds().width/2,height/2-won.getGlobalBounds().height/2);
+        won.setColor(Color::Green);
+
+        lost.setString("You have lost this game, \n better luck next time!");
+        lost.setFont(font);
+        lost.setCharacterSize(20);
+        lost.setPosition(width/2-lost.getGlobalBounds().width/2,height/2-lost.getGlobalBounds().height/2);
+        lost.setColor(Color::Red);
+
+        score.setString("0");
+        score.setFont(font);
+        score.setCharacterSize(30);
+        score.setPosition(width/2+score.getGlobalBounds().width/2,height-60);
+        score.setColor(Color(0,0,100,50));
+
+        lives.setString("5");
+        lives.setFont(font);
+        lives.setCharacterSize(50);
+        lives.setPosition(width/2-lives.getGlobalBounds().width/2,height-60);
+        lives.setColor(Color(0,0,100,50));
+
+        fps.setString("0");
+        fps.setFont(font);
+        fps.setCharacterSize(30);
+        fps.setPosition(fps.getGlobalBounds().width/2,height-40);
+        fps.setColor(Color(52,0,100,50));
+        
+        blip=Sound(soundBuffer1);        
+        blam=Sound(soundBuffer2);    
+        blap=Sound(soundBuffer3);    
+        blop=Sound(soundBuffer4);
+        
+        resetGame();
+        gameState=INTRO;
+
+        grid.setDimensions(7,5);
+        grid.left=borderSize+5;
+        grid.top=borderSize+5;
+        grid.width=width-2*borderSize-10;
+        grid.height=250;
+        grid.init();
+    }
+
+    void display()
+    {        
+        window.clear(Color::White);
+        switch(gameState)
+        {
+            case INTRO:
+                window.draw(title);
+                window.draw(start);
+                break;
+            case PLAYING:
+                window.draw(left);
+                window.draw(right);            
+                grid.display(window);
+                window.draw(player);    
+                window.draw(ball);    
+                window.draw(score);    
+                window.draw(lives);    
+                window.draw(top);
+                window.draw(bottom);        
+                window.draw(fps);    
+                break;
+            case GAME_WON:
+                window.draw(won);
+                break;
+            case GAME_LOST:
+                window.draw(lost);
+                break;
+        }
+        window.display();
+    }
+
+    void updatePlayer()
+    {
+        // move player 1 pad
+        if (Keyboard::isKeyPressed(Keyboard::Left))
+        {
+            player.move(-moveDistance*updateTime/50.0,0);
+        }else
+        if (Keyboard::isKeyPressed(Keyboard::Right))
+        {
+            player.move(moveDistance*updateTime/50.0,0);
+        }
+    }
+
+    void updateBall()
+    {
+        ball.move(ballSpeed.x*updateTime,ballSpeed.y*updateTime);
+    }
+
+    void checkCollisions()
+    {
+                        
+        // block players pad inside the play area
+        if ( intersects(player,left) || intersects(player,right) )
+        {
+            FloatRect l=left.getGlobalBounds();
+            FloatRect r=right.getGlobalBounds();
+            Vector2f p=player.getPosition();
+            p.x=clamp(p.x,l.left+l.width+5,r.left-player.getGlobalBounds().width-5);
+            player.setPosition(p.x,p.y);
+            blap.play();
+        }
+        // ball collides with top, left and right
+        if (intersects(ball,top))
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.y= abs(ballSpeed.y);
+            int u = t.top + t.height - b.top;
+            ball.move(0,2*u);   
+            blop.play();
+        }
+        if (intersects(ball,left))
+        {
+            FloatRect l=left.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.x= abs(ballSpeed.x);
+            int u = l.left + l.width - b.left;
+            b.left = l.left +  l.width + u;
+            ball.setPosition(b.left,b.top);
+            blop.play();
+        }
+
+        if (intersects(ball,right))
+        {
+            FloatRect r=right.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.x= -abs(ballSpeed.x);
+            int u = b.left + b.width - r.left ;
+            b.left = r.left -  b.width - u;
+            ball.setPosition(b.left,b.top);
+            blop.play();
+        }
+
+        if ( intersects(ball,bottom) )
+        {            
+            blam.play();            
+            playerLives--;
+            std::stringstream str;
+            str &lt;&lt; playerLives;
+            lives.setString(str.str());
+            lives.setPosition(width/2-lives.getGlobalBounds().width/2,height-60);
+            resetBall();
+        }
+        // ball collides with player
+        if (intersects(ball,player))
+        {
+            FloatRect p= player.getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+
+            //let o be the center of p
+            Vector2f o=Vector2f(p.left+p.width/2,p.top+p.height/2);
+            //om: vector from o to the center of the ball M
+            Vector2f om=Vector2f(b.left+b.width/2-o.x,b.top+b.height/2-o.y);
+            // let's scale om to square dimensions and act as if p is a square
+            om.x/=p.width;
+            om.y/=p.height;
+            // reflect the ball according to the angle of om
+            float angle=atan2(om.y,om.x);
+            if ( angle &lt; -PI/4 &amp;&amp; angle &gt; -3*PI/4) //top
+            {
+                ballSpeed.y = -abs(ballSpeed.y);//in case of double contact
+                ballSpeed.x= (b.left+b.width/2 - p.left- p.width/2) / 200;
+                int u = b.top + b.height - p.top;
+                b.top = p.top - b.height - u;
+                ball.setPosition(b.left,b.top);
+                //increase ball speed by 2%
+                ballSpeed.x*=1.02f;
+                ballSpeed.y*=1.02f;                
+                blip.play();
+            }
+        }    
+        //ball collides with grid
+        if (grid.collide(ball,ballSpeed,playerScore))
+        {
+            blap.play();
+            playerScore+=200;
+            std::stringstream str;
+            str &lt;&lt; playerScore &lt;&lt; " pts  ";
+            score.setString(str.str());
+            score.setPosition(width/2+score.getGlobalBounds().width/2-margin,height-60);
+        }
+        // check for end of game
+        if (grid.isGameWon())
+            gameState=GAME_WON;
+        if (playerLives&lt;=0)
+            gameState=GAME_LOST;
+    }
+
+    void resetGame()
+    {
+        playerScore=0;
+        playerLives=5;
+        resetBall();
+    }
+    void resetBall()
+    {
+        FloatRect p=player.getGlobalBounds();
+        FloatRect b=ball.getGlobalBounds();
+        ball.setPosition(p.left+p.width/2+5, p.top);
+        ballSpeed.x=0.1f;
+        ballSpeed.y=-0.3f;        
+    }
+};
+
+
+int main()
+{
+    Game game;
+    if (!game.init())
+        return EXIT_FAILURE;
+    return game.exec();
+}
+</pre>
+<p><em>Result:</em></p>
+<p>
+This is a simple implementation of Break Out! in which the bricks turn green after one hit and disappear after the second hit. The behaviour of the bricks is not completely clean yet.
+</p>
+<p><a href="https://riseagain.files.wordpress.com/2012/07/21-break-out.png"><img data-attachment-id="814" data-permalink="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/21-break-out/" data-orig-file="https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=901" data-orig-size="656,515" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="21 – break out" data-image-description="" data-medium-file="https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=901?w=300" data-large-file="https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=901?w=656" class="size-full wp-image-814 aligncenter" title="21 - break out" src="https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=901" alt="" srcset="https://riseagain.files.wordpress.com/2012/07/21-break-out.png 656w, https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=150 150w, https://riseagain.files.wordpress.com/2012/07/21-break-out.png?w=300 300w" sizes="(max-width: 656px) 100vw, 656px"></a></p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x" style="display: inline-block !important;">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type="text/javascript" id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script><div id="fif_slot_automattic-id-9071" style="width:300px;height:250px;"><iframe id="fif_slot_automattic-id-_fif_slot_automattic-id-9071" name="fif_slot_automattic-id-_fif_slot_automattic-id-9071" frameborder="0" scrolling="no" width="300" height="250" style="border:none;width:300px;height:250px;" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource.html"></iframe></div><div id="fif_slot_automattic-id-9358" style="width:300px;height:250px;"><iframe id="fif_slot_automattic-id-_fif_slot_automattic-id-9358" name="fif_slot_automattic-id-_fif_slot_automattic-id-9358" frameborder="0" scrolling="no" width="300" height="250" style="border:none;width:300px;height:250px;" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource(6).html"></iframe></div>
+				</div>
+				        <div id="crt-1786536697" style="width: 300px; height: 250px; display: none !important;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-1786536697');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-1786536697",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-1786536697'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li><a href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/#" class="sharing-anchor sd-button share-more"><span>Share</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-811" class="share-twitter sd-button share-icon no-text" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-end"></li><li class="share-end"></li></ul></div></div></div></div></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="652" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2012/07/15/sfml-2-tutorial-introduction/" title="SFML 2 - Tutorial - Introduction
+
+Tutorial 01 - Introduction - Plus or Minus SFML is a cross-platform API. It supports Windows, Linux and Mac. Its license makes it free even for commercial use. It was created by the french programmer Laurent Gomila in C++ and there are bindings for various languages. SFML 2 is available…" rel="nofollow" data-origin="811" data-position="0">SFML 2 - Tutorial - Introduction</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="796" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/" title="SFML 2 - Tutorial - Pong
+
+Tutorial 02 - Basic Animations - Pong In this tutorial, we will cover animations, collisions and the game of pong. How to make animations ? We can make objects on the screen look animated by updating their properties fast and smoothly. For instance a movement animation will call setPosition or…" rel="nofollow" data-origin="811" data-position="1">SFML 2 - Tutorial - Pong</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="303" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2011/03/25/classic-pac-man-postmortem-toru-iwatani-gdc-2011/" title="Classic Pac-Man Postmortem - Toru Iwatani - GDC 2011
+
+GDC 2011 - March 2, 2011 Toru Iwatani is professor at the Faculty of Arts, Department of Game at Tokyo Polytechnic University, and a fellow in Namco Bandai Games, Inc. He joined Namco in 1977 and created Pac-Man in 1980. Toru produced more than 50 games including Galaga, Xevious, Pac-land,…" rel="nofollow" data-origin="811" data-position="2">Classic Pac-Man Postmortem - Toru Iwatani - GDC 2011</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p></div></div></div>						<div class="fixed"></div>
+		</div>
+		<div class="under">
+			<span><span class="categories">Categories: </span><a href="https://riseagain.wordpress.com/category/game-development/" rel="category tag">Game Development</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/" rel="category tag">Programming</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/tutorial-programming/" rel="category tag">Tutorial</a></span>
+			<span></span>
+		</div>
+		<div class="fixed"></div>
+	</div>
+
+	
+
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/comment.js.download"></script>
+
+<div id="comments">
+
+	
+		<div id="cmtswitcher">
+										<a id="commenttab" class="curtab" href="javascript:void(0);">Comments (4)</a>
+			
+			
+					</div><!-- #cmtswitcher -->
+
+		<div id="commentlist">
+
+			<!-- Comments -->
+			<ol id="thecomments">
+								<li id="comment-582" class="comment even thread-even depth-1 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/38de69e54d0d481a0d054397d3628032" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32" id="grav-38de69e54d0d481a0d054397d3628032-0">			</div><!-- .pic -->
+			<div class="name">
+				qner			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				July 28, 2012 at 9:03 AM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-582">
+					<p>Nice tutorial. Thank you!<br>
+Found this on my way:<br>
+* One million divided [by] the number of<br>
+* window.setFramerateLimit([unsigned int])<br>
+* a #define for 1000000 would be great</p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+</li><!-- #comment-## -->
+	<li id="comment-584" class="comment byuser comment-author-riseagain bypostauthor odd alt thread-odd thread-alt depth-1 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/66c1b4a28e2bb4daaf8bab00df65b359" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32" id="grav-66c1b4a28e2bb4daaf8bab00df65b359-0">			</div><!-- .pic -->
+			<div class="name">
+				<a href="https://riseagain.wordpress.com/" rel="external nofollow" class="url">gorgoroth666</a>			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				July 29, 2012 at 9:21 PM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-584">
+					<p>Thank you very much.</p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+</li><!-- #comment-## -->
+	<li id="comment-597" class="comment even thread-even depth-1 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="https://i2.wp.com/graph.facebook.com/100002337117358/picture?q=type%3Dlarge&amp;resize=32%2C32" class="avatar avatar-32" height="32" width="32">			</div><!-- .pic -->
+			<div class="name">
+				<a href="http://www.facebook.com/BCG.Alphanumerix" rel="external nofollow" class="url">Bcg Alphanumerix</a>			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				September 21, 2012 at 3:03 PM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-597">
+					<p>In both games ball got problem with bouncing. In Pong when CPU hit the ball it start flying vertical, so no one can touch it, and in Break Out its flying with parabolic move and it stop when it hit wall. I don’t think, that it is caused by using another compiler (C::B) <img draggable="false" class="emoji" alt="😦" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/1f626.svg"></p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+<ul class="children">
+	<li id="comment-598" class="comment odd alt depth-2 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="https://i2.wp.com/graph.facebook.com/100002337117358/picture?q=type%3Dlarge&amp;resize=32%2C32" class="avatar avatar-32" height="32" width="32">			</div><!-- .pic -->
+			<div class="name">
+				<a href="http://www.facebook.com/BCG.Alphanumerix" rel="external nofollow" class="url">Bcg Alphanumerix</a>			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				September 21, 2012 at 3:05 PM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-598">
+					<p>But its still great tutorial for beginners  <img draggable="false" class="emoji" alt="🙂" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/1f642.svg"></p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+						</ol><!-- #thecomments -->
+
+			
+			<!-- Trackbacks and Pingbacks -->
+			<ol id="thetrackbacks">
+									<li class="messagebox">
+						No trackbacks yet.					</li>
+							</ol><!-- #thetrackbacks -->
+
+		</div><!-- #commentlist -->
+	
+	<div class="no-comments messagebox">Comments are closed.</div>
+
+
+</div><!-- #comments -->
+
+	<div id="postnavi">
+		<span class="prev"><a href="https://riseagain.wordpress.com/2017/04/13/quick-game-development-with-c11-c14-cppcon2014/" rel="next">Quick Game Development with C++11 / C++14 –&nbsp;CppCon2014</a></span>
+		<span class="next"><a href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/" rel="prev">SFML 2 – Tutorial –&nbsp;Pong</a></span>
+		<div class="fixed"></div>
+	</div>
+
+
+	</div>
+	<!-- main END -->
+
+		<div class="fixed"></div>
+</div>
+<!-- content END -->
+
+<!-- footer START -->
+<div id="footer">
+	<a id="gotop" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/#" onclick="MGJS.goTop();return false;">Top</a>
+	<div id="themeinfo">
+		<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a> 	</div>
+</div>
+<!-- footer END -->
+
+</div>
+<!-- container END -->
+</div>
+<!-- wrap END -->
+
+<!--  -->
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/gprofiles.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/wpgroho.js.download"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-38de69e54d0d481a0d054397d3628032">
+	</div>
+	<div class="grofile-hash-map-66c1b4a28e2bb4daaf8bab00df65b359">
+	</div>
+	<div class="grofile-hash-map-47563c109592a6a5bf6ffbe69cb39f4d">
+	</div>
+	</div>
+
+	<div id="carousel-reblog-box">
+		<form action="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="759692">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://riseagain.wordpress.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="RiseAgain">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="1835c44e93"><input type="hidden" name="_wp_http_referer" value="/2012/07/19/sfml-2-tutorial-break-out/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/riseagain.wordpress.com\/2012\/07\/19\/sfml-2-tutorial-break-out\/":811};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource(2)"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+<link rel="stylesheet" id="all-css-0-2" href="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"759692","siteName":"RiseAgain","siteURL":"http:\/\/riseagain.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6a42d66ca81825cdcc2da54c85beca00?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/inove","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F","themeURL":"","xhrURL":"https:\/\/riseagain.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"0121aaf90b","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"2c7a50c755\" \/>","referer":"https:\/\/riseagain.wordpress.com\/2012\/07\/19\/sfml-2-tutorial-break-out\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/riseagain.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F","postID":"811","shortlink":"http:\/\/wp.me\/p3bD6-d5","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/riseagain.wordpress.com\/811","statsLink":"https:\/\/wordpress.com\/stats\/post\/811\/riseagain.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: INove","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 405 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/riseagain.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"528c2386dd","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F","blog_id":"759692","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=759692&v=wpcom&tz=1&user_id=0&subd=riseagain","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/saved_resource(3)"></script><div id="actionbar" class="actnbr-pub-inove actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://riseagain.wordpress.com/"><img alt="" src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/6a42d66ca81825cdcc2da54c85beca00" class="avatar avatar-50" height="50" width="50"> RiseAgain</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://riseagain.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://riseagain.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F19%2Fsfml-2-tutorial-break-out%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/p3bD6-d5">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/w.js.download" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'759692','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'759692','v':'wpcom','tz':'1','user_id':'0','post':'811','subd':'riseagain'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWU3JixXRU5XS21nQzFmT0IyLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNUP21dMVBfLUtBNFQ3MlYxdV9mL08xWTI3VnEsJkxmUSUlWS50Y1RSL3hZbEYweS83Y0hxJnRNPyVqOHJOLFBFenxGUU1sK3FdSC9OZVJnLHpUeFlzRjlbfHRpMi1hTWotJWF1YUFwZUJlSm1kcU9ybmU5R0tFNSVkLVtER1s/cTMyQ00/SXNLRmdJWjJZUA=='}]);
+_stq.push([ 'clickTrackerInit', '759692', '811' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<img src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/g.gif" alt=":)" id="wpstats"><iframe src="./SFML 2 – Tutorial – Break Out! _ RiseAgain_files/iu3.html" style="display: none;"></iframe></body></html>

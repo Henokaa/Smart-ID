@@ -1,0 +1,1046 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SFML 2 – Tutorial – Pong | RiseAgain</title>
+
+<link rel="stylesheet" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/style.css" type="text/css" media="screen">
+
+<script async="" type="text/javascript" src="https://s.pubmine.com/adj/26942/300/250/?tz=-180&amp;fl=25&amp;ref=&amp;pos=btf&amp;v=1.3.2&amp;sfv=2&amp;hb=%7B%22PM%22%3A%22nobid%22%2C%22A9M%22%3A%22to%22%7D&amp;user_group=4&amp;wordAds=0&amp;adSafe=0&amp;domain=riseagain.wordpress.com&amp;pageURL=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F&amp;ord=3598744619206&amp;callbackPubmine=automattic_jsonp_handler_fif_slot_automattic_id_9607" id="slots_script_fif_slot_automattic-id-9607"></script><script defer="" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/beacon.js.download"></script><script src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/AdCallAggregator" async=""></script><script type="text/javascript" async="" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/bid"></script><script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/base.js.download"></script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/menu.js.download"></script>
+
+<link rel="pingback" href="https://riseagain.wordpress.com/xmlrpc.php">
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » Feed" href="https://riseagain.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » Comments Feed" href="https://riseagain.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="RiseAgain » SFML 2 – Tutorial – Pong Comments Feed" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.5"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/saved_resource(1)"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://riseagain.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Sociality And Individuality – GLS24" href="https://riseagain.wordpress.com/2012/07/17/sociality-and-individuality-gls24/">
+<link rel="next" title="SFML 2 – Tutorial – Break Out!" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/">
+<link rel="shortlink" href="http://wp.me/p3bD6-cQ">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="SFML 2 – Tutorial – Pong">
+<meta property="og:url" content="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/">
+<meta property="og:description" content="Tutorial 02 – Basic Animations – Pong In this tutorial, we will cover animations, collisions and the game of pong. How to make animations ? We can make objects on the screen look animat…">
+<meta property="article:published_time" content="2012-07-17T20:50:38+00:00">
+<meta property="article:modified_time" content="2017-04-14T17:39:18+00:00">
+<meta property="og:site_name" content="RiseAgain">
+<meta property="og:image" content="https://riseagain.files.wordpress.com/2012/07/11-pong.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=32" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=32" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=114">
+<link rel="openid.server" href="https://riseagain.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://riseagain.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://riseagain.wordpress.com/osd.xml" title="RiseAgain">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="RiseAgain"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Game Development, Game AI, Game Design and Software Engineering"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://riseagain.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6a42d66ca81825cdcc2da54c85beca00?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="SFML 2 – Tutorial – Pong | RiseAgain on WordPress.com">
+<meta name="description" content="Tutorial 02 - Basic Animations - Pong In this tutorial, we will cover animations, collisions and the game of pong. How to make animations ? We can make objects on the screen look animated by updating their properties fast and smoothly. For instance a movement animation will call setPosition or move to update the position…">
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'riseagain.wordpress.com',
+				pageURL: 'https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/'
+			};
+		</script>
+ 		<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/head.js.download"></script>
+		<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/publishertag.js.download"></script><link rel="amphtml" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/amp/"><link rel="stylesheet" type="text/css" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/shCore.css"><link rel="stylesheet" type="text/css" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/ga.js.download"></script>
+<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/services.css"><iframe src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/showad.html" height="0" width="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="height: 0px; width: 0px; border: 0px;"></iframe></head>
+
+<body class="post-template-default single single-post postid-796 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<!-- wrap START -->
+<div id="wrap">
+
+<!-- container START -->
+<div id="container" class="one-column">
+
+<!-- header START -->
+<div id="header">
+
+	<!-- banner START -->
+		<!-- banner END -->
+
+	<div id="caption">
+		<h1 id="title"><a href="https://riseagain.wordpress.com/">RiseAgain</a></h1>
+		<div id="tagline">Game Development, Game AI, Game Design and Software Engineering</div>
+	</div>
+
+	<div class="fixed"></div>
+</div>
+<!-- header END -->
+
+<!-- navigation START -->
+<div id="navigation">
+	<!-- menus START -->
+	<ul id="menus" class="menu"><li><a class="home" href="https://riseagain.wordpress.com/" title="Home">Home</a></li><li id="menu-item-823" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-823"><a href="https://riseagain.wordpress.com/c-game-development-using-sfml-2-tutorials/">Tutorials</a></li>
+<li id="menu-item-786" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-786"><a href="https://riseagain.wordpress.com/category/game-development/game-development-talks/">GameDev Talks</a></li>
+<li id="menu-item-790" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-790"><a href="https://riseagain.wordpress.com/about/">About</a></li>
+</ul>	<!-- menus END -->
+
+	<!-- searchbox START -->
+	<div id="searchbox">
+		<form action="https://riseagain.wordpress.com/" method="get">
+			<div class="content">
+				<input type="text" class="textfield searchtip" name="s" size="24" value="">
+				<input type="submit" class="button" value="">
+			</div>
+		</form>
+	</div>
+<script type="text/javascript">
+//<![CDATA[
+	var searchbox = MGJS.$("searchbox");
+	var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+	var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+	var tiptext = "Type text to search here...";
+	if(searchtxt.value == "" || searchtxt.value == tiptext) {
+		searchtxt.className += " searchtip";
+		searchtxt.value = tiptext;
+	}
+	searchtxt.onfocus = function(e) {
+		if(searchtxt.value == tiptext) {
+			searchtxt.value = "";
+			searchtxt.className = searchtxt.className.replace(" searchtip", "");
+		}
+	}
+	searchtxt.onblur = function(e) {
+		if(searchtxt.value == "") {
+			searchtxt.className += " searchtip";
+			searchtxt.value = tiptext;
+		}
+	}
+	searchbtn.onclick = function(e) {
+		if(searchtxt.value == "" || searchtxt.value == tiptext) {
+			return false;
+		}
+	}
+//]]>
+</script>
+	<!-- searchbox END -->
+
+	<div class="fixed"></div>
+</div>
+<!-- navigation END -->
+
+<!-- content START -->
+<div id="content">
+
+	<!-- main START -->
+	<div id="main">
+
+
+	<div id="postpath">
+		<a title="Go to homepage" href="https://riseagain.wordpress.com/">Home</a>
+		 &gt; <a href="https://riseagain.wordpress.com/category/game-development/" rel="category tag">Game Development</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/" rel="category tag">Programming</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/tutorial-programming/" rel="category tag">Tutorial</a>		 &gt; SFML 2 – Tutorial –&nbsp;Pong	</div>
+
+	<div id="post-796" class="post-796 post type-post status-publish format-standard hentry category-game-development category-programming category-tutorial-programming tag-gamedev-2">
+		<h2>SFML 2 – Tutorial –&nbsp;Pong</h2>
+		<div class="info">
+			<span class="date">July 17, 2012</span>
+												<div class="fixed"></div>
+		</div>
+		<div class="content">
+			<p><br></p>
+<h1 style="text-align:center;">Tutorial 02 – Basic Animations – Pong</h1>
+<p><br><br>
+In this tutorial, we will cover animations, collisions and the game of pong.</p>
+<p><span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="901" height="537" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/GVPV3aEZsLQ.html" allowfullscreen="true" style="border:0;"></iframe></span><br>
+<br><br></p>
+<h2 style="text-align:center;"><strong>How to make animations ?</strong></h2>
+<p><br><br>
+We can make objects on the screen look animated by updating their properties fast and smoothly.</p>
+<p>For instance a movement animation will call setPosition or move to update the position of the object by small increments.</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">// if speed(vx,vy) is constant, the movement is linear and uniform
+void updateShape(Shape &amp;shape, int vx, int vy)
+{
+    shape.move(vx,vy);
+}
+</pre>
+<p>A color animation would call setColor and a sprite animation would update its texture according to the current animation frame and type of movement.</p>
+<h2 style="text-align:center;"><strong>How to detect collisions ?</strong></h2>
+<p>The simplest collision test between two rectangles in motion is testing if the rectangles intersect.</p>
+<p>Supposing our rectangles stay aligned to the axis (no rotation), we can use:</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">FloatRect RectangleShape::getGlobalBounds();
+</pre>
+<p>The FloatRect class provides an intersect function.</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">bool intersects (const RectangleShape &amp; rect1,const RectangleShape &amp; rect2)
+{
+    FloatRect r1=rect1.getGlobalBounds();
+    FloatRect r2=rect2.getGlobalBounds();
+    return r1.intersects (r2);
+}
+</pre>
+<p>Once the collision is detected we can process it by updating the speed and position of the objects. In the following example, only the ball is moving, we’ll reflect its speed on collisions.</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">#include &lt;SFML\Graphics.hpp&gt;
+
+using namespace sf;
+
+bool intersects (const RectangleShape &amp; rect1,const RectangleShape &amp; rect2)
+{
+    FloatRect r1=rect1.getGlobalBounds();
+    FloatRect r2=rect2.getGlobalBounds();
+    return r1.intersects (r2);
+}
+
+int main()
+{
+    const int width = 640;
+    const int height= 480;
+    const int borderSize= 30;
+
+    VideoMode videoMode(width, height);
+    RenderWindow window(videoMode,"Rectangle Collision");
+
+    RectangleShape top;
+    RectangleShape left;
+    RectangleShape right;
+    RectangleShape bottom;
+
+    top.setPosition(borderSize, 0);
+    top.setSize(Vector2f(width-2*borderSize, borderSize));
+
+    left.setPosition(0, 0);
+    left.setSize(Vector2f(borderSize, height));
+
+    right.setPosition(width-borderSize, 0);
+    right.setSize(Vector2f(borderSize, height));
+
+    bottom.setPosition(borderSize, height-borderSize);
+    bottom.setSize(Vector2f(width-2*borderSize, borderSize));
+
+    top.setFillColor(Color(100,100,100));
+    top.setOutlineColor(Color::Blue);
+    top.setOutlineThickness(3);
+
+    left.setFillColor(Color(100,100,100));
+    left.setOutlineColor(Color::Blue);
+    left.setOutlineThickness(3);
+
+    right.setFillColor(Color(100,100,100));
+    right.setOutlineColor(Color::Blue);
+    right.setOutlineThickness(3);
+
+    bottom.setFillColor(Color(100,100,100));
+    bottom.setOutlineColor(Color::Blue);
+    bottom.setOutlineThickness(3);
+
+    RectangleShape ball;
+    ball.setPosition(width/2, height/2);
+    ball.setSize(Vector2f(20, 20));
+    ball.setFillColor(Color::Red);
+    ball.setOutlineColor(Color::Yellow);
+    ball.setOutlineThickness(1);
+
+    Vector2 ballSpeed(0.1,0.1);
+
+    while (window.isOpen())
+    {
+        window.clear(Color::White);
+        window.draw(top);
+        window.draw(bottom);
+        window.draw(left);
+        window.draw(right);
+        window.draw(ball);
+        window.display();
+
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if ( (event.type == Event::Closed) ||
+            ((event.type == Event::KeyPressed) &amp;&amp; (event.key.code==Keyboard::Escape)) )
+                window.close();
+
+        }
+
+        if (intersects(ball,top) || intersects(ball,bottom) )
+        {
+            ballSpeed.y=-ballSpeed.y;
+        }
+        if (intersects(ball,left) || intersects(ball,right))
+        {
+            ballSpeed.x=-ballSpeed.x;
+        }
+
+        ball.move(ballSpeed.x,ballSpeed.y);
+
+    }
+    return EXIT_SUCCESS;
+}
+</pre>
+<p>Result:</p>
+<p><a href="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png"><img data-attachment-id="797" data-permalink="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/10-rectangle-collision/" data-orig-file="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=901" data-orig-size="654,515" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="10 – rectangle collision" data-image-description="" data-medium-file="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=901?w=300" data-large-file="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=901?w=654" class="size-full wp-image-797 aligncenter" title="10 - rectangle collision" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/10-rectangle-collision.png" alt="" srcset="https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png 654w, https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=150 150w, https://riseagain.files.wordpress.com/2012/07/10-rectangle-collision.png?w=300 300w" sizes="(max-width: 654px) 100vw, 654px"></a><br>
+<br><br></p>
+<h2 style="text-align:center;"><strong>How to make pong ?</strong></h2>
+<p><br><br>
+In addition to the previous example, we’ll add two rectangles representing the two players on both sides of the screen. They will both reflect the ball. The left and right rectanles of the previous example will serve to detect who scores.</p>
+<p>In order to get a little more realism on collisions, we will adjust the position of the ball after each collision, as described in the following figure.</p>
+<p style="text-align:center;"><a href="https://riseagain.files.wordpress.com/2012/07/grids_collisions.png"><img data-attachment-id="799" data-permalink="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/grids_collisions/" data-orig-file="https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=721&amp;h=576" data-orig-size="1280,1024" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="grids_collisions" data-image-description="" data-medium-file="https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=721&amp;h=576?w=300" data-large-file="https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=721&amp;h=576?w=901" class=" wp-image-799 aligncenter" title="grids_collisions" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/grids_collisions.png" alt="" width="721" height="576" srcset="https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=721&amp;h=576 721w, https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=150&amp;h=120 150w, https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=300&amp;h=240 300w, https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=768&amp;h=614 768w, https://riseagain.files.wordpress.com/2012/07/grids_collisions.png?w=1024&amp;h=819 1024w, https://riseagain.files.wordpress.com/2012/07/grids_collisions.png 1280w" sizes="(max-width: 721px) 100vw, 721px"></a></p>
+<p>If the ball touches the left or right edge of the screen, we update the score and reset the positions. The first player to reach the score of 11 with at least 2 points more than the other player wins the game.</p>
+<pre class="brush: cpp; title: ; toolbar: false; notranslate" title="">#include &lt;SFML/Graphics.hpp&gt;
+#include &lt;algorithm&gt;
+#include &lt;sstream&gt;
+
+using namespace sf;
+
+bool intersects (const RectangleShape &amp; rect1,const RectangleShape &amp; rect2)
+{
+    FloatRect r1=rect1.getGlobalBounds();
+    FloatRect r2=rect2.getGlobalBounds();
+    return r1.intersects (r2);
+}
+
+int clamp (const int x, const int a, const int b)
+{
+    return std::min(std::max(a,x),b);
+}
+
+int main()
+{
+    const int width = 640;
+    const int height= 480;
+    const int borderSize= 12;
+    const int margin = 50;
+    const int moveDistance = 5;
+
+    VideoMode videoMode(width, height);
+    RenderWindow window(videoMode,"Pong SFML 2");
+
+    Font font;
+    if (!font.loadFromFile("tomb.ttf"))
+        return EXIT_FAILURE;     
+   
+    RectangleShape top;
+    RectangleShape left;
+    RectangleShape right;
+    RectangleShape bottom;    
+
+    // setting up all items
+    top.setPosition(0, 0);
+    top.setSize(Vector2f(width, borderSize));
+
+    left.setPosition(-borderSize, 0);
+    left.setSize(Vector2f(borderSize, height));
+
+    right.setPosition(width, 0);
+    right.setSize(Vector2f(borderSize, height));
+
+    bottom.setPosition(0, height-borderSize);
+    bottom.setSize(Vector2f(width, borderSize));
+            
+    top.setFillColor(Color(100,100,100));
+    top.setOutlineColor(Color::Blue);
+    top.setOutlineThickness(3);
+
+    left.setFillColor(Color(100,100,100));
+    left.setOutlineColor(Color::Blue);
+    left.setOutlineThickness(3);
+
+    right.setFillColor(Color(100,100,100));
+    right.setOutlineColor(Color::Blue);
+    right.setOutlineThickness(3);
+
+    bottom.setFillColor(Color(100,100,100));
+    bottom.setOutlineColor(Color::Blue);
+    bottom.setOutlineThickness(3);
+
+    RectangleShape ball;
+    ball.setPosition(width/2, height/2);
+    ball.setSize(Vector2f(20, 20));
+    ball.setFillColor(Color::Yellow);
+    ball.setOutlineColor(Color::Red);
+    ball.setOutlineThickness(2);
+
+    Vector2&lt;float&gt; ballSpeed(0.1,0.1);
+
+    RectangleShape player1;    
+    player1.setSize(Vector2f(borderSize, 90));
+    player1.setPosition(margin-borderSize, height/2-25);
+    player1.setFillColor(Color(0,122,245));
+    player1.setOutlineColor(Color::Red);
+    player1.setOutlineThickness(3);
+
+    RectangleShape player2;    
+    player2.setSize(Vector2f(borderSize, 90));
+    player2.setPosition(width-margin, height/2-25);
+    player2.setFillColor(Color(0,122,245));
+    player2.setOutlineColor(Color::Red);
+    player2.setOutlineThickness(3);
+    
+    RectangleShape middleLine;
+    middleLine.setFillColor(Color(100,100,100,30));
+    middleLine.setOutlineColor(Color(0,0,100,30));
+    middleLine.setOutlineThickness(2);
+    middleLine.setPosition(width/2, 0);
+    middleLine.setSize(Vector2f(0, height));
+
+    Text title("Pong SFML 2",font,50);
+    title.setPosition(width/2-title.getGlobalBounds().width/2,100);
+    title.setColor(Color::Blue); 
+    
+    Text start("Press any key to start",font,30);
+    start.setPosition(width/2-start.getGlobalBounds().width/2,400);
+    start.setColor(Color::Red);
+
+    Text won("You have won this game.\n\n Congratulations !",font,20);
+    won.setPosition(width/2-won.getGlobalBounds().width/2,height/2-won.getGlobalBounds().height/2);
+    won.setColor(Color::Green);
+
+    Text lost("You have lost this game, \n better luck next time!",font,20);
+    lost.setPosition(width/2-lost.getGlobalBounds().width/2,height/2-lost.getGlobalBounds().height/2);
+    lost.setColor(Color::Red);
+
+    Text score("0   0",font,50);
+    score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+    score.setColor(Color(0,0,100,50));
+
+    unsigned int p1Score=0, p2Score=0;
+
+    enum states {INTRO, PLAYING, P1WON, P1LOST};
+    
+    int gameState=INTRO;
+
+    while (window.isOpen())
+    {
+        window.clear(Color::White);
+        switch(gameState)
+        {
+            case INTRO:
+                window.draw(title);
+                window.draw(start);
+                break;
+            case PLAYING:
+                window.draw(middleLine);
+                window.draw(left);
+                window.draw(right);            
+                window.draw(player1);    
+                window.draw(player2);    
+                window.draw(ball);    
+                window.draw(score);    
+                window.draw(top);
+                window.draw(bottom);        
+                break;
+            case P1WON:
+                window.draw(won);
+                break;
+            case P1LOST:
+                window.draw(lost);
+                break;
+        }
+        window.display();
+        
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if ( (event.type == Event::Closed) ||
+            ((event.type == Event::KeyPressed) &amp;&amp; (event.key.code==Keyboard::Escape)) )
+                window.close();    
+            else
+            if ((event.type == Event::KeyPressed) &amp;&amp; (gameState == INTRO))
+                gameState=PLAYING;
+        }
+        
+        if (gameState!=PLAYING)
+            continue;
+
+        // auto move player2 pad
+        if (ball.getPosition().y &lt; player2.getPosition().y)
+            player2.move(0, -moveDistance/40.0);
+        else if(ball.getPosition().y+ball.getSize().y &gt; player2.getPosition().y+player2.getSize().y)
+            player2.move(0, moveDistance/40.0);
+        // move player 1 pad
+        if (Keyboard::isKeyPressed(Keyboard::Up))
+        {
+            player1.move(0,-moveDistance/50.0);
+        }else
+        if (Keyboard::isKeyPressed(Keyboard::Down))
+        {
+            player1.move(0,moveDistance/50.0);
+        }
+        // block players pad inside the play area
+        if ( intersects(player1,bottom) || intersects(player1,top) )
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=bottom.getGlobalBounds();
+            Vector2f p=player1.getPosition();
+            p.y=clamp(p.y,t.top+t.height+5,b.top-player1.getSize().y-5);
+            player1.setPosition(p);
+        }
+        if ( intersects(player2,bottom) || intersects(player2,top) )
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=bottom.getGlobalBounds();
+            Vector2f p=player2.getPosition();
+            p.y=clamp(p.y,t.top+t.height+5,b.top-player2.getSize().y-5);
+            player2.setPosition(p);
+        }
+        // ball collides with top and bottom
+        if (intersects(ball,top))
+        {
+            FloatRect t=top.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.y=-ballSpeed.y;
+            int u = t.top + t.height - b.top;
+            ball.move(0,2*u);            
+        }
+        if ( intersects(ball,bottom) )
+        {
+            FloatRect bot= bottom.getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+            ballSpeed.y=-ballSpeed.y;
+            int u = bot.top - b.height - b.top;
+            ball.move(0,2*u);   
+        }
+        // ball collides with player1 and player2
+        if (intersects(ball,player1))
+        {
+            FloatRect p= player1.getGlobalBounds();
+            FloatRect b= ball.getGlobalBounds();
+            ballSpeed.x= -ballSpeed.x;
+            ballSpeed.y= (b.top+b.height/2 - p.top - p.height/2) / 100;
+            int u = p.left +  p.width - b.left;
+            b.left = p.left +  p.width + u;
+            ball.setPosition(b.left,b.top);
+            //increase ball speed by 1%
+            ballSpeed.x=ballSpeed.x*1.01;
+            ballSpeed.y=ballSpeed.y*1.01;
+        }
+        if ( intersects(ball,player2) )
+        {
+            FloatRect p=player2.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ballSpeed.x=-ballSpeed.x;
+            ballSpeed.y= (b.top+b.height/2 - p.top - p.height/2) / 100;
+            int u = b.left + b.width - p.left;
+            b.left = p.left -  b.width - u;
+            ball.setPosition(b.left,b.top);
+            //increase ball speed by 1%
+            ballSpeed.x=ballSpeed.x*1.01;
+            ballSpeed.y=ballSpeed.y*1.01;
+        }                        
+        
+        // check for scoring
+        if (intersects(ball,left))
+        {
+            p2Score++;
+            std::stringstream str;
+            str &lt;&lt; p1Score &lt;&lt; "   " &lt;&lt; p2Score;
+            score.setString(str.str());
+            score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+            FloatRect p=player2.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ball.setPosition(p.left-b.width-5, height/2);
+            ballSpeed.x=-0.1;
+            ballSpeed.y=0.1;
+
+        }
+        if (intersects(ball,right))
+        {
+            p1Score++;
+            std::stringstream str;
+            str &lt;&lt; p1Score &lt;&lt; "   " &lt;&lt; p2Score;
+            score.setString(str.str());
+            score.setPosition(width/2-score.getGlobalBounds().width/2,40);
+            FloatRect p=player1.getGlobalBounds();
+            FloatRect b=ball.getGlobalBounds();
+            ball.setPosition(p.left+p.width+5, height/2);
+            ballSpeed.x=0.1;
+            ballSpeed.y=0.1;
+        }
+        // detect if game is over
+        if (p1Score &gt;=11 &amp;&amp; p1Score &gt;= p2Score +2)
+            gameState=P1WON;
+        if (p2Score &gt;=11 &amp;&amp; p2Score &gt;= p1Score +2)
+            gameState=P1LOST;
+
+        
+        
+        ball.move(ballSpeed.x,ballSpeed.y);
+
+        
+    }
+    return EXIT_SUCCESS;
+}
+</pre>
+<p><em>Result:</em><br>
+<a href="https://riseagain.files.wordpress.com/2012/07/11-pong.png"><img data-attachment-id="798" data-permalink="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/11-pong/" data-orig-file="https://riseagain.files.wordpress.com/2012/07/11-pong.png?w=901" data-orig-size="651,513" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="11 – pong" data-image-description="" data-medium-file="https://riseagain.files.wordpress.com/2012/07/11-pong.png?w=901?w=300" data-large-file="https://riseagain.files.wordpress.com/2012/07/11-pong.png?w=901?w=651" class="size-full wp-image-798 aligncenter" title="11 - pong" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/11-pong.png" alt="" srcset="https://riseagain.files.wordpress.com/2012/07/11-pong.png 651w, https://riseagain.files.wordpress.com/2012/07/11-pong.png?w=150 150w, https://riseagain.files.wordpress.com/2012/07/11-pong.png?w=300 300w" sizes="(max-width: 651px) 100vw, 651px"></a></p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x" style="display: inline-block !important;">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type="text/javascript" id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script><div id="fif_slot_automattic-id-9607" style="width:300px;height:250px;"></div><div id="fif_slot_automattic-id-762" style="width:300px;height:250px;"><iframe id="fif_slot_automattic-id-_fif_slot_automattic-id-762" name="fif_slot_automattic-id-_fif_slot_automattic-id-762" frameborder="0" scrolling="no" width="300" height="250" style="border:none;width:300px;height:250px;" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/saved_resource.html"></iframe></div>
+				</div>
+				        <div id="crt-1691005597" style="width: 300px; height: 250px; display: none !important;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-1691005597');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-1691005597",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-1691005597'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li><a href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/#" class="sharing-anchor sd-button share-more"><span>Share</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-796" class="share-twitter sd-button share-icon no-text" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-end"></li><li class="share-end"></li></ul></div></div></div></div></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="652" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2012/07/15/sfml-2-tutorial-introduction/" title="SFML 2 - Tutorial - Introduction
+
+Tutorial 01 - Introduction - Plus or Minus SFML is a cross-platform API. It supports Windows, Linux and Mac. Its license makes it free even for commercial use. It was created by the french programmer Laurent Gomila in C++ and there are bindings for various languages. SFML 2 is available…" rel="nofollow" data-origin="796" data-position="0">SFML 2 - Tutorial - Introduction</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="811" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/" title="SFML 2 - Tutorial - Break Out!
+
+Tutorial 03 - Basic Game Structure - Break Out! In this tutorial, we will cover refresh rate, a basic game structure, a custom game loop and the game of Break Out!. How to get the refresh rate in frame per second ? With the Clock class, we can query the…" rel="nofollow" data-origin="796" data-position="1">SFML 2 - Tutorial - Break Out!</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="528" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://riseagain.wordpress.com/2011/04/25/528/" title="Pixar: Keep Your Crises Small - Ed Catmull
+
+Stanford - January 31, 2007 Ironing out the little problems can make it so companies can avoid big disasters. Catmull appeared at the 2007 Entrepreneurship Conference at the Stanford Graduate School of Business. Dr. Edwin Catmull is a computer scientist and current president of Walt Disney Animation Studios and Pixar…" rel="nofollow" data-origin="796" data-position="2">Pixar: Keep Your Crises Small - Ed Catmull</a></span><span class="jp-relatedposts-post-context">In "Game Development"</span></p></div></div></div>						<div class="fixed"></div>
+		</div>
+		<div class="under">
+			<span><span class="categories">Categories: </span><a href="https://riseagain.wordpress.com/category/game-development/" rel="category tag">Game Development</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/" rel="category tag">Programming</a>, <a href="https://riseagain.wordpress.com/category/game-development/programming/tutorial-programming/" rel="category tag">Tutorial</a></span>
+			<span></span>
+		</div>
+		<div class="fixed"></div>
+	</div>
+
+	
+
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/comment.js.download"></script>
+
+<div id="comments">
+
+	
+		<div id="cmtswitcher">
+										<a id="commenttab" class="curtab" href="javascript:void(0);">Comments (2)</a>
+			
+			
+					</div><!-- #cmtswitcher -->
+
+		<div id="commentlist">
+
+			<!-- Comments -->
+			<ol id="thecomments">
+								<li id="comment-596" class="comment even thread-even depth-1 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="https://i2.wp.com/graph.facebook.com/100002337117358/picture?q=type%3Dlarge%26_md5%3D09b2040d573414ab488fe47b6e007f34&amp;resize=32%2C32" class="avatar avatar-32" height="32" width="32">			</div><!-- .pic -->
+			<div class="name">
+				<a href="http://www.facebook.com/BCG.Alphanumerix" rel="external nofollow" class="url">Bcg Alphanumerix</a>			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				September 20, 2012 at 10:59 AM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-596">
+					<p>First source code don’t work. Error in line 61. Including system library (i’ve found there Vector2.hpp file) doesn’t help, but I have found working solution – create object ballSpeed for another class – Vector2f. Line 61 should look like this:<br>
+Vector2f ballSpeed(0.1,0.1);</p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+<ul class="children">
+	<li id="comment-599" class="comment byuser comment-author-riseagain bypostauthor odd alt depth-2 highlander-comment">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/66c1b4a28e2bb4daaf8bab00df65b359" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32" id="grav-66c1b4a28e2bb4daaf8bab00df65b359-0">			</div><!-- .pic -->
+			<div class="name">
+				<a href="https://riseagain.wordpress.com/" rel="external nofollow" class="url">gorgoroth666</a>			</div><!-- .name -->
+		</div>
+
+		<div class="info">
+			<div class="date">
+				September 22, 2012 at 12:12 PM			</div><!-- .date -->
+			<div class="act">
+											</div><!-- .act -->
+			<div class="content">
+				
+				<div id="commentbody-599">
+					<p>Thank you for the comment.</p>
+				</div><!-- #commentbody-ID -->
+			</div><!-- .comment -->
+			<div class="fixed"></div>
+		</div><!-- .info -->
+		<div class="fixed"></div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+						</ol><!-- #thecomments -->
+
+			
+			<!-- Trackbacks and Pingbacks -->
+			<ol id="thetrackbacks">
+									<li class="messagebox">
+						No trackbacks yet.					</li>
+							</ol><!-- #thetrackbacks -->
+
+		</div><!-- #commentlist -->
+	
+	<div class="no-comments messagebox">Comments are closed.</div>
+
+
+</div><!-- #comments -->
+
+	<div id="postnavi">
+		<span class="prev"><a href="https://riseagain.wordpress.com/2012/07/19/sfml-2-tutorial-break-out/" rel="next">SFML 2 – Tutorial – Break&nbsp;Out!</a></span>
+		<span class="next"><a href="https://riseagain.wordpress.com/2012/07/17/sociality-and-individuality-gls24/" rel="prev">Sociality And Individuality –&nbsp;GLS24</a></span>
+		<div class="fixed"></div>
+	</div>
+
+
+	</div>
+	<!-- main END -->
+
+		<div class="fixed"></div>
+</div>
+<!-- content END -->
+
+<!-- footer START -->
+<div id="footer">
+	<a id="gotop" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/#" onclick="MGJS.goTop();return false;">Top</a>
+	<div id="themeinfo">
+		<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a> 	</div>
+</div>
+<!-- footer END -->
+
+</div>
+<!-- container END -->
+</div>
+<!-- wrap END -->
+
+<!--  -->
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/gprofiles.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/wpgroho.js.download"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-47563c109592a6a5bf6ffbe69cb39f4d">
+	</div>
+	<div class="grofile-hash-map-66c1b4a28e2bb4daaf8bab00df65b359">
+	</div>
+	</div>
+
+	<div id="carousel-reblog-box">
+		<form action="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="759692">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://riseagain.wordpress.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="RiseAgain">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="1835c44e93"><input type="hidden" name="_wp_http_referer" value="/2012/07/17/sfml-2-tutorial-pong/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/riseagain.wordpress.com\/2012\/07\/17\/sfml-2-tutorial-pong\/":796};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/saved_resource(2)"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+<link rel="stylesheet" id="all-css-0-2" href="./SFML 2 – Tutorial – Pong _ RiseAgain_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"759692","siteName":"RiseAgain","siteURL":"http:\/\/riseagain.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6a42d66ca81825cdcc2da54c85beca00?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/inove","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F","themeURL":"","xhrURL":"https:\/\/riseagain.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"0121aaf90b","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"2c7a50c755\" \/>","referer":"https:\/\/riseagain.wordpress.com\/2012\/07\/17\/sfml-2-tutorial-pong\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/riseagain.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F","postID":"796","shortlink":"http:\/\/wp.me\/p3bD6-cQ","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/riseagain.wordpress.com\/796","statsLink":"https:\/\/wordpress.com\/stats\/post\/796\/riseagain.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: INove","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 405 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/riseagain.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"528c2386dd","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/riseagain.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F","blog_id":"759692","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=759692&v=wpcom&tz=1&user_id=0&subd=riseagain","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/saved_resource(3)"></script><div id="actionbar" class="actnbr-pub-inove actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://riseagain.wordpress.com/"><img alt="" src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/6a42d66ca81825cdcc2da54c85beca00" class="avatar avatar-50" height="50" width="50"> RiseAgain</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://riseagain.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://riseagain.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Friseagain.wordpress.com%2F2012%2F07%2F17%2Fsfml-2-tutorial-pong%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/p3bD6-cQ">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://riseagain.wordpress.com/2012/07/17/sfml-2-tutorial-pong/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/w.js.download" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'759692','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'759692','v':'wpcom','tz':'1','user_id':'0','post':'796','subd':'riseagain'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWU3JixXRU5XS21nQzFmT0IyLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNUP21dMVBfLUtBNFQ3MlZIU28tOWM/bmYtb1VmQ2slU3g4amcuLjlfXSV0MXAzRy0vdTV8eVc3fDNwLDZJM2p1S2JQU29xLz9Ubml6dWRjMyZdM1BUdDdMTldtci9KaWdEMmUuNWhqUFRqbi1OMWMwcGNRQ0N1Z3diVjAtSyxfMWZ+P1pOcS1aLF8/WVptNQ=='}]);
+_stq.push([ 'clickTrackerInit', '759692', '796' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<img src="./SFML 2 – Tutorial – Pong _ RiseAgain_files/g.gif" alt=":)" id="wpstats"></body></html>
